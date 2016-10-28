@@ -106,6 +106,7 @@ public class ArticleTypeController extends BaseController {
 	 */
 	@RequestMapping(value="/list")
 	public ModelAndView list(Page page){
+		//System.out.println("listtest");
 		logBefore(logger, "列表ArticleType");
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();

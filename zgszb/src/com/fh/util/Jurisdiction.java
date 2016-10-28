@@ -36,6 +36,7 @@ public class Jurisdiction {
 			for(int j=0;j<menuList.get(i).getSubMenu().size();j++){
 				if(menuList.get(i).getSubMenu().get(j).getMENU_URL().split(".do")[0].equals(menuUrl.split(".do")[0])){
 					if(!menuList.get(i).getSubMenu().get(j).isHasMenu()){				//判断有无此菜单权限
+						//System.out.println("无权限2");
 						return false;
 					}else{																//按钮判断
 						Map<String, String> map = (Map<String, String>)session.getAttribute(Const.SESSION_QX);//按钮权限
@@ -45,7 +46,9 @@ public class Jurisdiction {
 						map.remove("cha");
 						String MENU_ID =  menuList.get(i).getSubMenu().get(j).getMENU_ID();
 						String USERNAME = session.getAttribute(Const.SESSION_USERNAME).toString();	//获取当前登录者loginname
+						//System.out.println(USERNAME+"&&");
 						Boolean isAdmin = "admin".equals(USERNAME);
+						//System.out.println((RightsHelper.testRights(map.get("adds"), MENU_ID)) || isAdmin?"1":"0");
 						map.put("add", (RightsHelper.testRights(map.get("adds"), MENU_ID)) || isAdmin?"1":"0");
 						map.put("del", RightsHelper.testRights(map.get("dels"), MENU_ID) || isAdmin?"1":"0");
 						map.put("edit", RightsHelper.testRights(map.get("edits"), MENU_ID) || isAdmin?"1":"0");
@@ -81,11 +84,13 @@ public class Jurisdiction {
 			for(int j=0;j<menuList.get(i).getSubMenu().size();j++){
 				if(menuList.get(i).getSubMenu().get(j).getMENU_URL().split(".do")[0].equals(menuUrl.split(".do")[0])){
 					if(!menuList.get(i).getSubMenu().get(j).isHasMenu()){				//判断有无此菜单权限
+						//System.out.println("无权限");
 						return false;
 					}else{																//按钮判断
 						Map<String, String> map = (Map<String, String>)session.getAttribute(Const.SESSION_QX);//按钮权限
 						String MENU_ID =  menuList.get(i).getSubMenu().get(j).getMENU_ID();
 						String USERNAME = session.getAttribute(Const.SESSION_USERNAME).toString();	//获取当前登录者loginname
+						//System.out.println(USERNAME+"**");
 						Boolean isAdmin = "admin".equals(USERNAME);
 						if("add".equals(type)){
 							return ((RightsHelper.testRights(map.get("adds"), MENU_ID)) || isAdmin);

@@ -37,6 +37,7 @@ public class LoginHandlerInterceptor extends HandlerInterceptorAdapter{
 			if(user!=null){
 				path = path.substring(1, path.length());
 				boolean b = Jurisdiction.hasJurisdiction(path);
+				System.out.println(b +" LoginHand");
 				if(!b){
 					response.sendRedirect(request.getContextPath() + Const.LOGIN);
 				}
