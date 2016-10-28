@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FriendUrlMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into XNHB_SYS_FRIENDURL(
+			CREATEDATETIME,	
+			UPDATEDATETIME,	
+			CREATEUSER,	
+			UPDATEUSER,	
+			KEYWORD,	
+			SEQ,	
+			DESCRIPTION,	
+			FRIENDURLNAME,	
+			FRIENDURLTYPE,	
+			URL,	
+			FRIENDURL_ID
+		) values (
+			#{CREATEDATETIME},	
+			#{UPDATEDATETIME},	
+			#{CREATEUSER},	
+			#{UPDATEUSER},	
+			#{KEYWORD},	
+			#{SEQ},	
+			#{DESCRIPTION},	
+			#{FRIENDURLNAME},	
+			#{FRIENDURLTYPE},	
+			#{URL},	
+			#{FRIENDURL_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from XNHB_SYS_FRIENDURL
+		where 
+			FRIENDURL_ID = #{FRIENDURL_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  XNHB_SYS_FRIENDURL
+			set 
+				SEQ = #{SEQ},
+				DESCRIPTION = #{DESCRIPTION},
+				FRIENDURLNAME = #{FRIENDURLNAME},
+				FRIENDURLTYPE = #{FRIENDURLTYPE},
+				URL = #{URL},
+			FRIENDURL_ID = FRIENDURL_ID
+			where 
+				FRIENDURL_ID = #{FRIENDURL_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			CREATEDATETIME,	
+			UPDATEDATETIME,	
+			CREATEUSER,	
+			UPDATEUSER,	
+			KEYWORD,	
+			SEQ,	
+			DESCRIPTION,	
+			FRIENDURLNAME,	
+			FRIENDURLTYPE,	
+			URL,	
+			FRIENDURL_ID
+		from 
+			XNHB_SYS_FRIENDURL
+		where 
+			FRIENDURL_ID = #{FRIENDURL_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.CREATEDATETIME,	
+				a.UPDATEDATETIME,	
+				a.CREATEUSER,	
+				a.UPDATEUSER,	
+				a.KEYWORD,	
+				a.SEQ,	
+				a.DESCRIPTION,	
+				a.FRIENDURLNAME,	
+				a.FRIENDURLTYPE,	
+				a.URL,	
+				a.FRIENDURL_ID
+		from 
+				XNHB_SYS_FRIENDURL a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.CREATEDATETIME,	
+				a.UPDATEDATETIME,	
+				a.CREATEUSER,	
+				a.UPDATEUSER,	
+				a.KEYWORD,	
+				a.SEQ,	
+				a.DESCRIPTION,	
+				a.FRIENDURLNAME,	
+				a.FRIENDURLTYPE,	
+				a.URL,	
+				a.FRIENDURL_ID
+		from 
+				XNHB_SYS_FRIENDURL a
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from XNHB_SYS_FRIENDURL
+		where 
+			FRIENDURL_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

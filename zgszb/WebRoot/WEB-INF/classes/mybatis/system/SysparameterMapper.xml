@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SysparameterMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into XNHB_SYS_SYSPARAMETER(
+			CREATEDATETIME,	
+			UPDATEDATETIME,	
+			CREATEUSER,	
+			UPDATEUSER,	
+			KEY,	
+			VALUE,	
+			URL,	
+			PICTURE,	
+			DESCRIPTION,	
+			SEQ,	
+			SYSPARAMETER_ID
+		) values (
+			#{CREATEDATETIME},	
+			#{UPDATEDATETIME},	
+			#{CREATEUSER},	
+			#{UPDATEUSER},	
+			#{KEY},	
+			#{VALUE},	
+			#{URL},	
+			#{PICTURE},	
+			#{DESCRIPTION},	
+			#{SEQ},	
+			#{SYSPARAMETER_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from XNHB_SYS_SYSPARAMETER
+		where 
+			SYSPARAMETER_ID = #{SYSPARAMETER_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  XNHB_SYS_SYSPARAMETER
+			set 
+				KEY = #{KEY},
+				VALUE = #{VALUE},
+				URL = #{URL},
+				PICTURE = #{PICTURE},
+				DESCRIPTION = #{DESCRIPTION},
+				SEQ = #{SEQ},
+			SYSPARAMETER_ID = SYSPARAMETER_ID
+			where 
+				SYSPARAMETER_ID = #{SYSPARAMETER_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			CREATEDATETIME,	
+			UPDATEDATETIME,	
+			CREATEUSER,	
+			UPDATEUSER,	
+			KEY,	
+			VALUE,	
+			URL,	
+			PICTURE,	
+			DESCRIPTION,	
+			SEQ,	
+			SYSPARAMETER_ID
+		from 
+			XNHB_SYS_SYSPARAMETER
+		where 
+			SYSPARAMETER_ID = #{SYSPARAMETER_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.CREATEDATETIME,	
+				a.UPDATEDATETIME,	
+				a.CREATEUSER,	
+				a.UPDATEUSER,	
+				a.KEY,	
+				a.VALUE,	
+				a.URL,	
+				a.PICTURE,	
+				a.DESCRIPTION,	
+				a.SEQ,	
+				a.SYSPARAMETER_ID
+		from 
+				XNHB_SYS_SYSPARAMETER a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.CREATEDATETIME,	
+				a.UPDATEDATETIME,	
+				a.CREATEUSER,	
+				a.UPDATEUSER,	
+				a.KEY,	
+				a.VALUE,	
+				a.URL,	
+				a.PICTURE,	
+				a.DESCRIPTION,	
+				a.SEQ,	
+				a.SYSPARAMETER_ID
+		from 
+				XNHB_SYS_SYSPARAMETER a
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from XNHB_SYS_SYSPARAMETER
+		where 
+			SYSPARAMETER_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>
